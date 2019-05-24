@@ -1,0 +1,3 @@
+interface IListenable {
+    handleTimerEvent(): void;
+}
