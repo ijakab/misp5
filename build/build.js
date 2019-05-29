@@ -21,17 +21,22 @@ var Config = (function () {
     return Config;
 }());
 var Level = (function () {
-    function Level() {
-        this.initialPlayerPosition = new Point(50, 50);
+    function Level(initialPlayerPosition) {
+        if (initialPlayerPosition === void 0) { initialPlayerPosition = new Point(50, 50); }
+        this.initialPlayerPosition = initialPlayerPosition;
+        this.player = new Player(this.initialPlayerPosition);
     }
+    Level.prototype.animate = function () {
+        this.player.animate();
+    };
     return Level;
 }());
 var Player = (function () {
-    function Player(level) {
+    function Player(position) {
+        this.position = position;
         this.energy = 0;
         this.velocity = 3;
         this.config = Config.getInstance();
-        this.position = level.initialPlayerPosition;
     }
     Player.prototype.animate = function () {
         ellipse(this.position.x, this.position.y, 50, 50);
@@ -46,12 +51,11 @@ var Point = (function () {
     return Point;
 }());
 var level = new Level();
-var player = new Player(level);
 function setup() {
     createCanvas(500, 500);
 }
 function draw() {
     background(225, 255, 100);
-    player.animate();
+    level.animate();
 }
 //# sourceMappingURL=build.js.map
