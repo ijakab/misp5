@@ -1,5 +1,5 @@
 // @ts-ignore
-let level:Level = new Level();
+let level:Level = new Level(0);
 
 function setup() {
     createCanvas(500, 500);

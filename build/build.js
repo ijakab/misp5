@@ -21,15 +21,29 @@ var Config = (function () {
     return Config;
 }());
 var Level = (function () {
-    function Level(initialPlayerPosition) {
-        if (initialPlayerPosition === void 0) { initialPlayerPosition = new Point(50, 50); }
-        this.initialPlayerPosition = initialPlayerPosition;
-        this.player = new Player(this.initialPlayerPosition);
+    function Level(levelNumber) {
+        this.levelNumber = levelNumber;
+        this.obstacles = [];
+        var config = levelConfig[levelNumber];
+        var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
+        this.player = new Player(playerStartingPosition);
+        for (var _i = 0, _a = config.obstacles; _i < _a.length; _i++) {
+            var obstacle = _a[_i];
+            this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
+        }
+        this.finishPosition = new Point(config.finishX, config.finishY);
     }
     Level.prototype.animate = function () {
         this.player.animate();
     };
     return Level;
+}());
+var Obstacle = (function () {
+    function Obstacle(startPoint, endPoint) {
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
+    }
+    return Obstacle;
 }());
 var Player = (function () {
     function Player(position) {
@@ -50,7 +64,23 @@ var Point = (function () {
     }
     return Point;
 }());
-var level = new Level();
+var levelConfig = [
+    {
+        playerStartX: 50,
+        playerStartY: 50,
+        obstacles: [
+            {
+                x1: 100,
+                x2: 200,
+                y1: 100,
+                y2: 200
+            }
+        ],
+        finishX: 200,
+        finishY: 200
+    }
+];
+var level = new Level(0);
 function setup() {
     createCanvas(500, 500);
 }
