@@ -24,6 +24,7 @@ var Level = (function () {
     function Level(levelNumber) {
         this.levelNumber = levelNumber;
         this.obstacles = [];
+        this.collisionListeners = [];
         var config = levelConfig[levelNumber];
         var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
@@ -32,13 +33,24 @@ var Level = (function () {
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
         }
         this.finishPosition = new Point(config.finishX, config.finishY);
+        this.collisionListeners.push(this.player);
     }
     Level.prototype.animate = function () {
         for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
         }
+        this.handleCollisions();
         this.player.animate();
+    };
+    Level.prototype.handleCollisions = function () {
+        var collision = Math.random() < 0.5;
+        if (collision) {
+            for (var _i = 0, _a = this.collisionListeners; _i < _a.length; _i++) {
+                var collidable = _a[_i];
+                collidable.onCollide();
+            }
+        }
     };
     return Level;
 }());
@@ -58,6 +70,8 @@ var Player = (function () {
     }
     Player.prototype.animate = function () {
         ellipse(this.position.x, this.position.y, 50, 50);
+    };
+    Player.prototype.onCollide = function () {
     };
     return Player;
 }());
