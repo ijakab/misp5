@@ -34,6 +34,10 @@ var Level = (function () {
         this.finishPosition = new Point(config.finishX, config.finishY);
     }
     Level.prototype.animate = function () {
+        for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
+            var obstacle = _a[_i];
+            line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
+        }
         this.player.animate();
     };
     return Level;
@@ -72,7 +76,7 @@ var levelConfig = [
             {
                 x1: 100,
                 x2: 200,
-                y1: 100,
+                y1: 200,
                 y2: 200
             }
         ],
@@ -83,6 +87,8 @@ var levelConfig = [
 var level = new Level(0);
 function setup() {
     createCanvas(500, 500);
+    strokeWeight(2);
+    stroke(51);
 }
 function draw() {
     background(225, 255, 100);

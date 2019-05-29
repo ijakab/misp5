@@ -16,6 +16,9 @@ class Level implements IListenable{
     }
 
     public animate(): void {
+        for(let obstacle of this.obstacles) {
+            line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
+        }
         this.player.animate();
     }
 }
