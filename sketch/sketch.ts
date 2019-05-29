@@ -5,6 +5,7 @@ function setup() {
     createCanvas(500, 500);
     strokeWeight(2);
     stroke(51);
+    textSize(20)
 }
 
 function draw() {

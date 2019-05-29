@@ -4,6 +4,7 @@ var Config = (function () {
         if (playerMass === void 0) { playerMass = 10; }
         this.frictionFactor = frictionFactor;
         this.playerMass = playerMass;
+        this.energyLossConstanct = 10;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -65,13 +66,21 @@ var Player = (function () {
     function Player(position) {
         this.position = position;
         this.energy = 0;
-        this.velocity = 3;
+        this.velocity = new Vector(0, 0);
         this.config = Config.getInstance();
     }
     Player.prototype.animate = function () {
+        text("Ek: " + this.energy, 20, 20);
+        text("Ek: " + this.energy, 50, 20);
         ellipse(this.position.x, this.position.y, 50, 50);
+        if (this.energy > 0) {
+            this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
+        }
     };
     Player.prototype.onCollide = function () {
+    };
+    Player.prototype.addEnergy = function (energyAmount) {
+        this.energy += energyAmount;
     };
     return Player;
 }());
@@ -81,6 +90,19 @@ var Point = (function () {
         this.y = y;
     }
     return Point;
+}());
+var Vector = (function () {
+    function Vector(i, j) {
+        this.i = i;
+        this.j = j;
+    }
+    Vector.prototype.amount = function () {
+        return Math.sqrt(this.i * this.i + this.j * this.j);
+    };
+    Vector.prototype.angle = function () {
+        return Math.atan(this.j / this.i);
+    };
+    return Vector;
 }());
 var levelConfig = [
     {
@@ -103,6 +125,7 @@ function setup() {
     createCanvas(500, 500);
     strokeWeight(2);
     stroke(51);
+    textSize(20);
 }
 function draw() {
     background(225, 255, 100);
