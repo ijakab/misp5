@@ -20,35 +20,38 @@ var Config = (function () {
     };
     return Config;
 }());
-var Player = (function () {
-    function Player() {
-        this.x = 50;
-        this.y = 500;
-        this.energy = 100;
-        this.velocity = 3;
+var Level = (function () {
+    function Level() {
+        this.initialPlayerPosition = new Point(50, 50);
     }
-    Player.prototype.animate = function (config) {
-        this.energy -= this.velocity;
-        if (this.energy > 0) {
-            this.y -= this.velocity;
-        }
-    };
-    Player.prototype.handleTimerEvent = function () {
-        console.log('lalalla');
+    return Level;
+}());
+var Player = (function () {
+    function Player(level) {
+        this.energy = 0;
+        this.velocity = 3;
+        this.config = Config.getInstance();
+        this.position = level.initialPlayerPosition;
+    }
+    Player.prototype.animate = function () {
+        ellipse(this.position.x, this.position.y, 50, 50);
     };
     return Player;
 }());
-var player = new Player();
+var Point = (function () {
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    return Point;
+}());
+var level = new Level();
+var player = new Player(level);
 function setup() {
     createCanvas(500, 500);
-    console.log(Config.getInstance().frictionFactor);
-}
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
 }
 function draw() {
     background(225, 255, 100);
-    textSize();
-    ellipse(player.x, player.y, 50, 50);
+    player.animate();
 }
 //# sourceMappingURL=build.js.map

@@ -1,3 +1,3 @@
 interface IListenable {
-    handleTimerEvent(): void;
+    animate(): void;
 }
