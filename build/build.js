@@ -1,7 +1,23 @@
 var Config = (function () {
-    function Config() {
-        this.friction = 0.9;
+    function Config(frictionFactor, playerMass) {
+        if (frictionFactor === void 0) { frictionFactor = 2; }
+        if (playerMass === void 0) { playerMass = 10; }
+        this.frictionFactor = frictionFactor;
+        this.playerMass = playerMass;
     }
+    Config.getInstance = function () {
+        if (this.instance)
+            return this.instance;
+        else {
+            this.instance = new Config();
+            this.instance.loadConfig();
+            return this.instance;
+        }
+    };
+    Config.prototype.loadConfig = function () {
+        this.frictionFactor = Number(localStorage.getItem('frictionFactor')) || 2;
+        this.playerMass = Number(localStorage.getItem('playerMass')) || 10;
+    };
     return Config;
 }());
 var Player = (function () {
@@ -23,24 +39,16 @@ var Player = (function () {
     return Player;
 }());
 var player = new Player();
-var config = new Config();
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    var listeners = [player];
-    setInterval(function () {
-        for (var _i = 0, listeners_1 = listeners; _i < listeners_1.length; _i++) {
-            var listener = listeners_1[_i];
-            listener.handleTimerEvent();
-        }
-    }, 500);
+    createCanvas(500, 500);
+    console.log(Config.getInstance().frictionFactor);
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 function draw() {
-    background(100);
+    background(225, 255, 100);
     textSize();
-    player.animate(config);
     ellipse(player.x, player.y, 50, 50);
 }
 //# sourceMappingURL=build.js.map
