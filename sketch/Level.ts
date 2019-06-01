@@ -3,6 +3,7 @@ class Level implements IListenable{
     private obstacles: Array<Obstacle> = [];
     private finishPosition: Point;
     private collisionListeners: Array<IColladible> = [];
+    private finished: boolean = false;
 
     constructor(
         private levelNumber: number
@@ -27,7 +28,8 @@ class Level implements IListenable{
         this.drawFinish()
             .handleCollisions()
             .checkFinish();
-        this.player.animate();
+        this.player.displayStats();
+        if(!this.finished) this.player.animate();
     }
 
     private handleCollisions(): Level {
@@ -46,9 +48,8 @@ class Level implements IListenable{
     }
 
     private checkFinish(): Level {
-        //todo use collision logic here when implemented. this is temporary solution
         if(this.player.position.isInRadius(this.finishPosition, 25)) {
-            console.log('FINISHIRO!!!')
+            this.finished = true;
         }
         return this;
     }

@@ -6,9 +6,13 @@
     constructor(public position: Point) {
     }
 
-    public animate(): Player {
+    public displayStats(): Player {
         text(`Ek: ${this.energy.toFixed(2)}`, 20, 20);
         text(`v: ${this.velocity.amount().toFixed(2)}`, 380, 20);
+        return this;
+    }
+
+    public animate(): Player {
         ellipse(this.position.x, this.position.y, 50, 50);
         if(this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();

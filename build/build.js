@@ -26,6 +26,7 @@ var Level = (function () {
         this.levelNumber = levelNumber;
         this.obstacles = [];
         this.collisionListeners = [];
+        this.finished = false;
         var config = levelConfig[levelNumber];
         var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
@@ -46,7 +47,9 @@ var Level = (function () {
         this.drawFinish()
             .handleCollisions()
             .checkFinish();
-        this.player.animate();
+        this.player.displayStats();
+        if (!this.finished)
+            this.player.animate();
     };
     Level.prototype.handleCollisions = function () {
         var collision = Math.random() < 0.5;
@@ -64,7 +67,7 @@ var Level = (function () {
     };
     Level.prototype.checkFinish = function () {
         if (this.player.position.isInRadius(this.finishPosition, 25)) {
-            console.log('FINISHIRO!!!');
+            this.finished = true;
         }
         return this;
     };
@@ -84,9 +87,12 @@ var Player = (function () {
         this.velocity = new Vector(0, 0);
         this.config = Config.getInstance();
     }
-    Player.prototype.animate = function () {
+    Player.prototype.displayStats = function () {
         text("Ek: " + this.energy.toFixed(2), 20, 20);
         text("v: " + this.velocity.amount().toFixed(2), 380, 20);
+        return this;
+    };
+    Player.prototype.animate = function () {
         ellipse(this.position.x, this.position.y, 50, 50);
         if (this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();
@@ -173,6 +179,20 @@ var Vector = (function () {
 var levelConfig = [
     {
         playerStartX: 50,
+        playerStartY: 50,
+        obstacles: [
+            {
+                x1: 100,
+                x2: 200,
+                y1: 200,
+                y2: 200
+            }
+        ],
+        finishX: 200,
+        finishY: 200
+    },
+    {
+        playerStartX: 100,
         playerStartY: 50,
         obstacles: [
             {
