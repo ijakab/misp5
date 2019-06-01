@@ -26,12 +26,12 @@ class Vector {
     }
 
     public rotateRight(angle: number): Vector {
-        this.setAngle(this.angle() + angle);
+        this.setAngle(this.angle() + angle * Math.PI/180);
         return this;
     }
 
     public rotateLeft(angle: number): Vector {
-        this.setAngle(this.angle() + angle);
+        this.setAngle(this.angle() - angle * Math.PI/180);
         return this;
     }
 }

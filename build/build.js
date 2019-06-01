@@ -156,10 +156,25 @@ var Point = (function () {
 }());
 var Spring = (function () {
     function Spring(positionToReference, orientation) {
-        this.positionToReference = positionToReference;
         this.orientation = orientation;
         this.energy = 0;
         this.config = Config.getInstance();
+        if (orientation === SpringOrientation.LEFT) {
+            this.position = new Point(positionToReference.x - 50, positionToReference.y);
+            this.orientationVector = new Vector(1, 0);
+        }
+        else if (orientation === SpringOrientation.RIGHT) {
+            this.position = new Point(positionToReference.x + 50, positionToReference.y);
+            this.orientationVector = new Vector(-1, 0);
+        }
+        else if (orientation === SpringOrientation.ABOVE) {
+            this.position = new Point(positionToReference.x, positionToReference.y - 50);
+            this.orientationVector = new Vector(0, 1);
+        }
+        else {
+            this.position = new Point(positionToReference.x, positionToReference.y + 50);
+            this.orientationVector = new Vector(0, -1);
+        }
     }
     Spring.prototype.displayStats = function () {
         text("Ep: " + this.energy.toFixed(2), 150, 20);
@@ -173,14 +188,18 @@ var Spring = (function () {
     };
     Spring.prototype.handleKeyEvents = function () {
         if (keyIsDown(38)) {
-            this.energy += 100;
+            this.energy += 70;
         }
         if (keyIsDown(40)) {
-            this.energy -= 100;
-        }
-        if (keyIsDown(37)) {
+            this.energy -= 70;
+            if (this.energy < 0)
+                this.energy = 0;
         }
         if (keyIsDown(39)) {
+            this.orientationVector.rotateRight(2);
+        }
+        if (keyIsDown(37)) {
+            this.orientationVector.rotateLeft(2);
         }
         return this;
     };
@@ -208,6 +227,21 @@ var Vector = (function () {
         var ratio = newAmount / this.amount();
         this.i *= ratio;
         this.j *= ratio;
+        return this;
+    };
+    Vector.prototype.setAngle = function (angle) {
+        var oldAmount = this.amount();
+        this.i = 1;
+        this.j = Math.tan(angle);
+        this.setAmount(oldAmount);
+        return this;
+    };
+    Vector.prototype.rotateRight = function (angle) {
+        this.setAngle(this.angle() + angle * Math.PI / 180);
+        return this;
+    };
+    Vector.prototype.rotateLeft = function (angle) {
+        this.setAngle(this.angle() - angle * Math.PI / 180);
         return this;
     };
     return Vector;
