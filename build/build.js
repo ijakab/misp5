@@ -50,6 +50,7 @@ var Level = (function () {
         this.player.displayStats();
         if (!this.finished)
             this.player.animate();
+        return this;
     };
     Level.prototype.handleCollisions = function () {
         var collision = Math.random() < 0.5;
@@ -192,7 +193,7 @@ var levelConfig = [
         finishY: 200
     },
     {
-        playerStartX: 100,
+        playerStartX: 300,
         playerStartY: 50,
         obstacles: [
             {

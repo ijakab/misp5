@@ -21,7 +21,7 @@ class Level implements IListenable{
         this.collisionListeners.push(this.player);
     }
 
-    public animate(): void {
+    public animate(): Level {
         for(let obstacle of this.obstacles) {
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
         }
@@ -30,6 +30,7 @@ class Level implements IListenable{
             .checkFinish();
         this.player.displayStats();
         if(!this.finished) this.player.animate();
+        return this;
     }
 
     private handleCollisions(): Level {

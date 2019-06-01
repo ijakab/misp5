@@ -14,7 +14,7 @@ const levelConfig = [
         finishY: 200
     },
     {
-        playerStartX: 100,
+        playerStartX: 300,
         playerStartY: 50,
         obstacles: [
             {
