@@ -9,4 +9,11 @@ class Vector {
     public angle() {
         return Math.atan(this.j/this.i)
     }
+
+    public setAmount(newAmount: number): Vector {
+        let ratio: number = newAmount / this.amount();
+        this.i *= ratio;
+        this.j *= ratio;
+        return this;
+    }
 }

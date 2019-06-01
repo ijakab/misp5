@@ -1,5 +1,5 @@
 class Config {
-    public energyLossConstanct: number = 10;
+    public energyLossConstanct: number = 0.005;
 
     constructor(public frictionFactor:number=2, public playerMass:number=10) {}
 

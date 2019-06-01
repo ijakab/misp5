@@ -1,5 +1,5 @@
 // @ts-ignore
-let level:Level = new Level(0);
+let level:Level = new Level(0); //todo from localstorage
 
 function setup() {
     createCanvas(500, 500);

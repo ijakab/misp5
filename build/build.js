@@ -4,7 +4,7 @@ var Config = (function () {
         if (playerMass === void 0) { playerMass = 10; }
         this.frictionFactor = frictionFactor;
         this.playerMass = playerMass;
-        this.energyLossConstanct = 10;
+        this.energyLossConstanct = 0.005;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -29,6 +29,7 @@ var Level = (function () {
         var config = levelConfig[levelNumber];
         var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
+        this.player.setVelocity(new Vector(1, 1));
         for (var _i = 0, _a = config.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
@@ -65,22 +66,35 @@ var Obstacle = (function () {
 var Player = (function () {
     function Player(position) {
         this.position = position;
-        this.energy = 0;
+        this.energy = 5000;
         this.velocity = new Vector(0, 0);
         this.config = Config.getInstance();
     }
     Player.prototype.animate = function () {
-        text("Ek: " + this.energy, 20, 20);
-        text("Ek: " + this.energy, 50, 20);
+        text("Ek: " + this.energy.toFixed(2), 20, 20);
+        text("v: " + this.velocity.amount().toFixed(2), 380, 20);
         ellipse(this.position.x, this.position.y, 50, 50);
         if (this.energy > 0) {
             this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
+            if (this.energy < 0)
+                this.energy = 0;
+            this.setVelocityFromEnergy();
         }
     };
     Player.prototype.onCollide = function () {
     };
+    Player.prototype.setVelocityFromEnergy = function () {
+        if (this.velocity.amount() === 0)
+            return;
+        var speed = Math.sqrt(2 * this.energy / this.config.playerMass);
+        this.velocity.setAmount(speed);
+    };
     Player.prototype.addEnergy = function (energyAmount) {
         this.energy += energyAmount;
+    };
+    Player.prototype.setVelocity = function (velocity) {
+        this.velocity = velocity;
+        this.velocity.setAmount(1);
     };
     return Player;
 }());
@@ -90,6 +104,11 @@ var Point = (function () {
         this.y = y;
     }
     return Point;
+}());
+var Spring = (function () {
+    function Spring() {
+    }
+    return Spring;
 }());
 var Vector = (function () {
     function Vector(i, j) {
@@ -101,6 +120,12 @@ var Vector = (function () {
     };
     Vector.prototype.angle = function () {
         return Math.atan(this.j / this.i);
+    };
+    Vector.prototype.setAmount = function (newAmount) {
+        var ratio = newAmount / this.amount();
+        this.i *= ratio;
+        this.j *= ratio;
+        return this;
     };
     return Vector;
 }());
