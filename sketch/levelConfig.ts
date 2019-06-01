@@ -2,8 +2,8 @@
 // @ts-ignore
 const levelConfig = [
     {
-        playerStartX: 50,
-        playerStartY: 50,
+        playerStartX: 150,
+        playerStartY: 150,
         obstacles: [
             {
                 x1: 100,

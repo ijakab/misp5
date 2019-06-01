@@ -5,7 +5,7 @@ var Config = (function () {
         this.frictionFactor = frictionFactor;
         this.playerMass = playerMass;
         this.energyLossConstant = 0.005;
-        this.springConstant = 2;
+        this.springConstant = 25;
         this.springBaseLength = 100;
     }
     Config.getInstance = function () {
@@ -181,14 +181,23 @@ var Spring = (function () {
         return this;
     };
     Spring.prototype.animate = function () {
-        this.handleKeyEvents().drawSpring();
+        console.log(this.orientationVector);
+        this.handleKeyEvents().handleContraction().drawSpring();
+    };
+    Spring.prototype.handleContraction = function () {
+        var x = this.energy / this.config.springConstant;
+        this.orientationVector.setAmount(this.config.springBaseLength - x);
+        return this;
     };
     Spring.prototype.drawSpring = function () {
+        line(this.position.x, this.position.y, this.position.x + this.orientationVector.i, this.position.y + this.orientationVector.j);
         return this;
     };
     Spring.prototype.handleKeyEvents = function () {
         if (keyIsDown(38)) {
             this.energy += 70;
+            if (this.energy > 2000)
+                this.energy = 2000;
         }
         if (keyIsDown(40)) {
             this.energy -= 70;
@@ -248,8 +257,8 @@ var Vector = (function () {
 }());
 var levelConfig = [
     {
-        playerStartX: 50,
-        playerStartY: 50,
+        playerStartX: 150,
+        playerStartY: 150,
         obstacles: [
             {
                 x1: 100,

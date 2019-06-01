@@ -26,16 +26,25 @@ class Spring implements IListenable {
     }
 
     public animate(): void {
-        this.handleKeyEvents().drawSpring();
+        console.log(this.orientationVector);
+        this.handleKeyEvents().handleContraction().drawSpring();
+    }
+
+    private handleContraction(): Spring {
+        let x = this.energy / this.config.springConstant;
+        this.orientationVector.setAmount(this.config.springBaseLength-x);
+        return this;
     }
 
     private drawSpring(): Spring {
+        line(this.position.x, this.position.y, this.position.x+this.orientationVector.i, this.position.y+this.orientationVector.j)
         return this;
     }
 
     private handleKeyEvents(): Spring {
         if(keyIsDown(38)) { //up arrow
             this.energy += 70;
+            if(this.energy > 2000) this.energy = 2000;
         }
         if(keyIsDown(40)) { //down arrow
             this.energy -= 70;
