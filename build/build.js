@@ -206,7 +206,8 @@ var levelConfig = [
         finishY: 200
     }
 ];
-var level = new Level(0);
+var levelNumber = localStorage.getItem('currentLevel') || 0;
+var level = new Level(Number(levelNumber));
 function setup() {
     createCanvas(500, 500);
     strokeWeight(2);

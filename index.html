@@ -21,9 +21,15 @@
     </head>
     <body>
         <div id="container">
-            <p>Masa :<input id="massInput" type="range" min="5" max="100" /></p>
-            <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200" /></p>
-            <p><button id="configSubmit" type="submit">Potvrdi</button></p>
+            <div id="options">
+                <p>Masa :<input id="massInput" type="range" min="5" max="100" /></p>
+                <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200" /></p>
+                <p><button id="configSubmit" type="submit">Potvrdi</button></p>
+            </div>
+            <div id="levelControl">
+                <button id="prevLvl"><<</button>
+                <button id="nextLvl">>></button>
+            </div>
         </div>
 
 
@@ -32,6 +38,7 @@
         let friction = Number(localStorage.getItem('frictionFactor')) || 10
         document.getElementById('massInput').value = mass
         document.getElementById('frictionInput').value = friction
+        let currentLevel = Number(localStorage.getItem('currentLevel') || 0)
 
         document.getElementById('configSubmit').addEventListener('click', function (e) {
             e.preventDefault()
@@ -39,6 +46,17 @@
             var friction = document.getElementById('frictionInput').value
             localStorage.setItem('frictionFactor', friction)
             localStorage.setItem('playerMass', mass)
+            window.location.reload()
+        })
+
+        document.getElementById('prevLvl').addEventListener('click', function () {
+            let newLevel = currentLevel === 0 ? levelConfig.length-1 : currentLevel-1
+            localStorage.setItem('currentLevel', newLevel)
+            window.location.reload()
+        })
+        document.getElementById('nextLvl').addEventListener('click', function () {
+            let newLevel = currentLevel === levelConfig.length-1 ? 0 : currentLevel+1
+            localStorage.setItem('currentLevel', newLevel)
             window.location.reload()
         })
     </script>
