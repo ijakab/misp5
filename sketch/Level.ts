@@ -1,5 +1,6 @@
 class Level implements IListenable{
     private player: Player;
+    private spring: Spring;
     private obstacles: Array<Obstacle> = [];
     private finishPosition: Point;
     private collisionListeners: Array<IColladible> = [];
@@ -11,8 +12,7 @@ class Level implements IListenable{
         let config = levelConfig[levelNumber];
         let playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
-        this.player.setVelocity(new Vector(1, 1)); //todo from spring class
-        this.player.addEnergy(5000);//todo from spring class
+        this.spring = new Spring(playerStartingPosition, config.springOrientation);
         for(let obstacle of config.obstacles) {
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
         }
@@ -21,7 +21,7 @@ class Level implements IListenable{
         this.collisionListeners.push(this.player);
     }
 
-    public animate(): Level {
+    public animate(): void {
         for(let obstacle of this.obstacles) {
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
         }
@@ -29,8 +29,8 @@ class Level implements IListenable{
             .handleCollisions()
             .checkFinish();
         this.player.displayStats();
+        this.spring.displayStats();
         if(!this.finished) this.player.animate();
-        return this;
     }
 
     private handleCollisions(): Level {

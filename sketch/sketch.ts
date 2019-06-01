@@ -11,5 +11,5 @@ function setup() {
 
 function draw() {
     background(225, 255, 100);
-    level.animate()
+    level.animate();
 }

@@ -1,3 +1,5 @@
+// @ts-ignore
+// @ts-ignore
 const levelConfig = [
     {
         playerStartX: 50,
@@ -11,7 +13,8 @@ const levelConfig = [
             }
         ],
         finishX: 200,
-        finishY: 200
+        finishY: 200,
+        springOrientation: SpringOrientation.LEFT
     },
     {
         playerStartX: 300,
@@ -25,6 +28,7 @@ const levelConfig = [
             }
         ],
         finishX: 200,
-        finishY: 200
+        finishY: 200,
+        springOrientation: SpringOrientation.RIGHT
     }
 ];

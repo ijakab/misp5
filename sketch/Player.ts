@@ -12,12 +12,11 @@
         return this;
     }
 
-    public animate(): Player {
+    public animate(): void {
         ellipse(this.position.x, this.position.y, 50, 50);
         if(this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();
         }
-        return this;
     }
 
     onCollide(): void {

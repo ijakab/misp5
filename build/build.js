@@ -30,8 +30,7 @@ var Level = (function () {
         var config = levelConfig[levelNumber];
         var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
-        this.player.setVelocity(new Vector(1, 1));
-        this.player.addEnergy(5000);
+        this.spring = new Spring(playerStartingPosition, config.springOrientation);
         for (var _i = 0, _a = config.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
@@ -48,9 +47,9 @@ var Level = (function () {
             .handleCollisions()
             .checkFinish();
         this.player.displayStats();
+        this.spring.displayStats();
         if (!this.finished)
             this.player.animate();
-        return this;
     };
     Level.prototype.handleCollisions = function () {
         var collision = Math.random() < 0.5;
@@ -98,7 +97,6 @@ var Player = (function () {
         if (this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();
         }
-        return this;
     };
     Player.prototype.onCollide = function () {
     };
@@ -154,10 +152,24 @@ var Point = (function () {
     return Point;
 }());
 var Spring = (function () {
-    function Spring() {
+    function Spring(positionToReference, orientation) {
+        this.energy = 0;
     }
+    Spring.prototype.displayStats = function () {
+        text("Ep: " + this.energy.toFixed(2), 150, 20);
+        return this;
+    };
+    Spring.prototype.animate = function () {
+    };
     return Spring;
 }());
+var SpringOrientation;
+(function (SpringOrientation) {
+    SpringOrientation[SpringOrientation["LEFT"] = 0] = "LEFT";
+    SpringOrientation[SpringOrientation["RIGHT"] = 1] = "RIGHT";
+    SpringOrientation[SpringOrientation["ABOVE"] = 2] = "ABOVE";
+    SpringOrientation[SpringOrientation["BELOW"] = 3] = "BELOW";
+})(SpringOrientation || (SpringOrientation = {}));
 var Vector = (function () {
     function Vector(i, j) {
         this.i = i;
@@ -190,7 +202,8 @@ var levelConfig = [
             }
         ],
         finishX: 200,
-        finishY: 200
+        finishY: 200,
+        springOrientation: SpringOrientation.LEFT
     },
     {
         playerStartX: 300,
@@ -204,7 +217,8 @@ var levelConfig = [
             }
         ],
         finishX: 200,
-        finishY: 200
+        finishY: 200,
+        springOrientation: SpringOrientation.RIGHT
     }
 ];
 var levelNumber = localStorage.getItem('currentLevel') || 0;
