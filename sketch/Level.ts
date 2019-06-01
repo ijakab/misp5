@@ -24,16 +24,32 @@ class Level implements IListenable{
         for(let obstacle of this.obstacles) {
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
         }
-        this.handleCollisions();
+        this.drawFinish()
+            .handleCollisions()
+            .checkFinish();
         this.player.animate();
     }
 
-    private handleCollisions(): void {
+    private handleCollisions(): Level {
         let collision = Math.random() < 0.5;
         if(collision) {
             for(let collidable of this.collisionListeners) {
                 collidable.onCollide();
             }
         }
+        return this;
+    }
+
+    private drawFinish(): Level {
+        circle(this.finishPosition.x, this.finishPosition.y, 50);
+        return this;
+    }
+
+    private checkFinish(): Level {
+        //todo use collision logic here when implemented. this is temporary solution
+        if(this.player.position.isInRadius(this.finishPosition, 25)) {
+            console.log('FINISHIRO!!!')
+        }
+        return this;
     }
 }

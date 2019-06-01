@@ -43,7 +43,9 @@ var Level = (function () {
             var obstacle = _a[_i];
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
         }
-        this.handleCollisions();
+        this.drawFinish()
+            .handleCollisions()
+            .checkFinish();
         this.player.animate();
     };
     Level.prototype.handleCollisions = function () {
@@ -54,6 +56,17 @@ var Level = (function () {
                 collidable.onCollide();
             }
         }
+        return this;
+    };
+    Level.prototype.drawFinish = function () {
+        circle(this.finishPosition.x, this.finishPosition.y, 50);
+        return this;
+    };
+    Level.prototype.checkFinish = function () {
+        if (this.player.position.isInRadius(this.finishPosition, 25)) {
+            console.log('FINISHIRO!!!');
+        }
+        return this;
     };
     return Level;
 }());
@@ -119,6 +132,17 @@ var Point = (function () {
         this.x += velocity.i;
         this.y += velocity.j;
         return this;
+    };
+    Point.prototype.isSame = function (otherPoint) {
+        return this.x === otherPoint.x && this.y === otherPoint.y;
+    };
+    Point.prototype.distanceFrom = function (otherPoint) {
+        var xSquared = (this.x - otherPoint.x) * (this.x - otherPoint.x);
+        var ySquared = (this.y - otherPoint.y) * (this.y - otherPoint.y);
+        return Math.sqrt(xSquared + ySquared);
+    };
+    Point.prototype.isInRadius = function (otherPoint, radius) {
+        return this.distanceFrom(otherPoint) <= radius;
     };
     return Point;
 }());
