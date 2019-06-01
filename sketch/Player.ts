@@ -35,7 +35,7 @@
     }
 
     private subtractEnergy(): Player {
-        this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
+        this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstant;
         if(this.energy < 0) this.energy = 0;
         return this;
     }

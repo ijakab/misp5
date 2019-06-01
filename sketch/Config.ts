@@ -1,5 +1,8 @@
 class Config {
-    public energyLossConstanct: number = 0.005;
+    public energyLossConstant: number = 0.005;
+
+    public springConstant: number = 2;
+    public springBaseLength: number = 100;
 
     constructor(public frictionFactor:number=2, public playerMass:number=10) {}
 

@@ -30,6 +30,7 @@ class Level implements IListenable{
             .checkFinish();
         this.player.displayStats();
         this.spring.displayStats();
+        this.spring.animate();
         if(!this.finished) this.player.animate();
     }
 

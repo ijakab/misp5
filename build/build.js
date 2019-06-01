@@ -4,7 +4,9 @@ var Config = (function () {
         if (playerMass === void 0) { playerMass = 10; }
         this.frictionFactor = frictionFactor;
         this.playerMass = playerMass;
-        this.energyLossConstanct = 0.005;
+        this.energyLossConstant = 0.005;
+        this.springConstant = 2;
+        this.springBaseLength = 100;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -48,6 +50,7 @@ var Level = (function () {
             .checkFinish();
         this.player.displayStats();
         this.spring.displayStats();
+        this.spring.animate();
         if (!this.finished)
             this.player.animate();
     };
@@ -112,7 +115,7 @@ var Player = (function () {
         return this;
     };
     Player.prototype.subtractEnergy = function () {
-        this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
+        this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstant;
         if (this.energy < 0)
             this.energy = 0;
         return this;
@@ -153,13 +156,33 @@ var Point = (function () {
 }());
 var Spring = (function () {
     function Spring(positionToReference, orientation) {
+        this.positionToReference = positionToReference;
+        this.orientation = orientation;
         this.energy = 0;
+        this.config = Config.getInstance();
     }
     Spring.prototype.displayStats = function () {
         text("Ep: " + this.energy.toFixed(2), 150, 20);
         return this;
     };
     Spring.prototype.animate = function () {
+        this.handleKeyEvents().drawSpring();
+    };
+    Spring.prototype.drawSpring = function () {
+        return this;
+    };
+    Spring.prototype.handleKeyEvents = function () {
+        if (keyIsDown(38)) {
+            this.energy += 100;
+        }
+        if (keyIsDown(40)) {
+            this.energy -= 100;
+        }
+        if (keyIsDown(37)) {
+        }
+        if (keyIsDown(39)) {
+        }
+        return this;
     };
     return Spring;
 }());
