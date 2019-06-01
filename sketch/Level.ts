@@ -11,6 +11,7 @@ class Level implements IListenable{
         let playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
         this.player.setVelocity(new Vector(1, 1)); //todo from spring class
+        this.player.addEnergy(5000);//todo from spring class
         for(let obstacle of config.obstacles) {
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
         }

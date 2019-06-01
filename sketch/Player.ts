@@ -1,5 +1,5 @@
  class Player implements IListenable, IColladible{
-    public energy:number = 5000;
+    public energy:number = 0;
     public velocity: Vector = new Vector(0, 0);
     private config: Config = Config.getInstance();
 

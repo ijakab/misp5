@@ -30,6 +30,7 @@ var Level = (function () {
         var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
         this.player = new Player(playerStartingPosition);
         this.player.setVelocity(new Vector(1, 1));
+        this.player.addEnergy(5000);
         for (var _i = 0, _a = config.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
@@ -66,7 +67,7 @@ var Obstacle = (function () {
 var Player = (function () {
     function Player(position) {
         this.position = position;
-        this.energy = 5000;
+        this.energy = 0;
         this.velocity = new Vector(0, 0);
         this.config = Config.getInstance();
     }
