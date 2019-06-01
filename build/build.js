@@ -76,11 +76,9 @@ var Player = (function () {
         text("v: " + this.velocity.amount().toFixed(2), 380, 20);
         ellipse(this.position.x, this.position.y, 50, 50);
         if (this.energy > 0) {
-            this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
-            if (this.energy < 0)
-                this.energy = 0;
-            this.setVelocityFromEnergy();
+            this.subtractEnergy().setVelocityFromEnergy().move();
         }
+        return this;
     };
     Player.prototype.onCollide = function () {
     };
@@ -89,13 +87,26 @@ var Player = (function () {
             return;
         var speed = Math.sqrt(2 * this.energy / this.config.playerMass);
         this.velocity.setAmount(speed);
+        return this;
+    };
+    Player.prototype.move = function () {
+        this.position.addVelocity(this.velocity);
+        return this;
+    };
+    Player.prototype.subtractEnergy = function () {
+        this.energy -= this.config.frictionFactor * this.config.playerMass * this.config.energyLossConstanct;
+        if (this.energy < 0)
+            this.energy = 0;
+        return this;
     };
     Player.prototype.addEnergy = function (energyAmount) {
         this.energy += energyAmount;
+        return this;
     };
     Player.prototype.setVelocity = function (velocity) {
         this.velocity = velocity;
         this.velocity.setAmount(1);
+        return this;
     };
     return Player;
 }());
@@ -104,6 +115,11 @@ var Point = (function () {
         this.x = x;
         this.y = y;
     }
+    Point.prototype.addVelocity = function (velocity) {
+        this.x += velocity.i;
+        this.y += velocity.j;
+        return this;
+    };
     return Point;
 }());
 var Spring = (function () {

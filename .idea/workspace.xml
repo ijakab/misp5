@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b244531-4ba7-4ed5-82c9-e2c5b774f52b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sketch/Spring.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Level.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Level.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sketch/Player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Player.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Vector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/sketch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/sketch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sketch/Point.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Point.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,17 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sketch/Player.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sketch/sketch.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="187">
+              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -43,8 +30,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="75" selection-start-line="12" selection-start-column="75" selection-end-line="12" selection-end-column="75" />
+            <state relative-caret-position="139">
+              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sketch/Point.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -65,15 +61,15 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/sketch/IListenable.ts" />
         <option value="$PROJECT_DIR$/sketch/Point.js" />
-        <option value="$PROJECT_DIR$/sketch/Point.ts" />
         <option value="$PROJECT_DIR$/sketch/Obstacle.ts" />
         <option value="$PROJECT_DIR$/sketch/levelConfig.ts" />
         <option value="$PROJECT_DIR$/sketch/IColladible.ts" />
         <option value="$PROJECT_DIR$/sketch/Config.ts" />
         <option value="$PROJECT_DIR$/sketch/Vector.ts" />
         <option value="$PROJECT_DIR$/sketch/sketch.ts" />
-        <option value="$PROJECT_DIR$/sketch/Level.ts" />
         <option value="$PROJECT_DIR$/sketch/Spring.ts" />
+        <option value="$PROJECT_DIR$/sketch/Level.ts" />
+        <option value="$PROJECT_DIR$/sketch/Point.ts" />
         <option value="$PROJECT_DIR$/sketch/Player.ts" />
       </list>
     </option>
@@ -197,12 +193,13 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="inputs for config and load config" />
     <MESSAGE value="added level class, point class, refactored player" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="obstacle class and constructing levels" />
     <MESSAGE value="drawing level obstacles" />
     <MESSAGE value="collision outline" />
     <MESSAGE value="vector class, some physics to player" />
-    <option name="LAST_COMMIT_MESSAGE" value="vector class, some physics to player" />
+    <MESSAGE value="energy/speed loss" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sketch/morph.ts" />
@@ -268,13 +265,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sketch/Point.js" />
-    <entry file="file://$PROJECT_DIR$/sketch/Point.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sketch/Obstacle.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -317,13 +307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="75" selection-start-line="12" selection-start-column="75" selection-end-line="12" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sketch/sketch.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -331,10 +314,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/Point.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sketch/Player.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        <state relative-caret-position="187">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
         </state>
       </provider>
     </entry>

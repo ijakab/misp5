@@ -3,4 +3,9 @@ class Point {
 
     }
 
+    public addVelocity(velocity: Vector): Point {
+        this.x += velocity.i;
+        this.y += velocity.j;
+        return this;
+    }
 }
