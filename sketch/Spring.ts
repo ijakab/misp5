@@ -26,7 +26,6 @@ class Spring implements IListenable {
     }
 
     public animate(): void {
-        console.log(this.orientationVector);
         this.handleKeyEvents().handleContraction().drawSpring();
     }
 
@@ -51,10 +50,10 @@ class Spring implements IListenable {
             if(this.energy < 0) this.energy = 0;
         }
         if(keyIsDown(39)) { //left arrow
-            this.orientationVector.rotateRight(2);
+            this.orientationVector.rotateRight(4);
         }
         if(keyIsDown(37)) { //left arrow
-            this.orientationVector.rotateLeft(2)
+            this.orientationVector.rotateLeft(4)
         }
         return this;
     }

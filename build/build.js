@@ -181,7 +181,6 @@ var Spring = (function () {
         return this;
     };
     Spring.prototype.animate = function () {
-        console.log(this.orientationVector);
         this.handleKeyEvents().handleContraction().drawSpring();
     };
     Spring.prototype.handleContraction = function () {
@@ -205,10 +204,10 @@ var Spring = (function () {
                 this.energy = 0;
         }
         if (keyIsDown(39)) {
-            this.orientationVector.rotateRight(2);
+            this.orientationVector.rotateRight(4);
         }
         if (keyIsDown(37)) {
-            this.orientationVector.rotateLeft(2);
+            this.orientationVector.rotateLeft(4);
         }
         return this;
     };
