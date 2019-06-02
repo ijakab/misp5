@@ -50,4 +50,8 @@
         this.velocity.setAmount(1);
         return this;
     }
+
+    public setPosition(position: Point) {
+        this.position = position;
+    }
  }
