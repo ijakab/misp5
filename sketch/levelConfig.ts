@@ -12,8 +12,8 @@ const levelConfig = [
                 y2: 200
             }
         ],
-        finishX: 200,
-        finishY: 200,
+        finishX: 400,
+        finishY: 400,
         springOrientation: SpringOrientation.LEFT
     },
     {

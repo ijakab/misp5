@@ -4,9 +4,9 @@ var Config = (function () {
         if (playerMass === void 0) { playerMass = 10; }
         this.frictionFactor = frictionFactor;
         this.playerMass = playerMass;
-        this.energyLossConstant = 0.005;
+        this.energyLossConstant = 0.002;
         this.springConstant = 25;
-        this.springBaseLength = 80;
+        this.springBaseLength = 100;
         this.springDistanceFromPlayer = 70;
         this.springMaximumEnergy = 1800;
     }
@@ -201,6 +201,14 @@ var Spring = (function () {
             this.player.setPosition(endPoint);
         return this;
     };
+    Spring.prototype.fire = function () {
+        if (this.fired)
+            return this;
+        this.fired = true;
+        this.player.setVelocity(this.orientationVector);
+        this.player.addEnergy(this.energy);
+        this.energy = 0;
+    };
     Spring.prototype.handleKeyEvents = function () {
         if (keyIsDown(38)) {
             this.energy += 70;
@@ -217,6 +225,9 @@ var Spring = (function () {
         }
         if (keyIsDown(37)) {
             this.orientationVector.rotateLeft(4);
+        }
+        if (keyIsDown(32)) {
+            this.fire();
         }
         return this;
     };
@@ -282,8 +293,8 @@ var levelConfig = [
                 y2: 200
             }
         ],
-        finishX: 200,
-        finishY: 200,
+        finishX: 400,
+        finishY: 400,
         springOrientation: SpringOrientation.LEFT
     },
     {

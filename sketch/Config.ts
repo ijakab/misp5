@@ -1,8 +1,8 @@
 class Config {
-    public energyLossConstant: number = 0.005;
+    public energyLossConstant: number = 0.002;
 
     public springConstant: number = 25;
-    public springBaseLength: number = 80;
+    public springBaseLength: number = 100;
     public springDistanceFromPlayer: number = 70;
     public springMaximumEnergy: number = 1800;
 

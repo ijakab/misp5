@@ -43,6 +43,14 @@ class Spring implements IListenable {
         return this;
     }
 
+    private fire(): Spring {
+        if(this.fired) return this;
+        this.fired = true;
+        this.player.setVelocity(this.orientationVector);
+        this.player.addEnergy(this.energy);
+        this.energy = 0;
+    }
+
     private handleKeyEvents(): Spring {
         if(keyIsDown(38)) { //up arrow
             this.energy += 70;
@@ -57,6 +65,9 @@ class Spring implements IListenable {
         }
         if(keyIsDown(37)) { //left arrow
             this.orientationVector.rotateLeft(4)
+        }
+        if(keyIsDown(32)) { //space
+            this.fire();
         }
         return this;
     }
