@@ -7,7 +7,9 @@ class Vector {
     }
 
     public angle(): number {
-        return Math.atan(this.j/this.i)
+        let atan = Math.atan(this.j/this.i)
+        if(this.i < 0) atan += Math.PI;
+        return atan;
     }
 
     public setAmount(newAmount: number): Vector {
@@ -18,15 +20,18 @@ class Vector {
     }
 
     public setAngle(angle: number): Vector {
+        angle = angle % (2*Math.PI);
         let oldAmount = this.amount();
         this.i = 1; //arbitrary
-        this.j = Math.tan(angle); //j = i*tan(angle), and i = 1
+        if((angle > Math.PI/2 && angle < 3*Math.PI/2) || angle < -Math.PI/2) this.i = -1;
+        this.j = this.i * Math.tan(angle); //j = i*tan(angle), and i = 1
         this.setAmount(oldAmount); //we don't change amount
         return this;
     }
 
     public rotateRight(angle: number): Vector {
-        this.setAngle(this.angle() + angle * Math.PI/180);
+        let oldAngle = this.angle();
+        this.setAngle(oldAngle + angle * Math.PI/180);
         return this;
     }
 

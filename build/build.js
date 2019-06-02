@@ -229,7 +229,10 @@ var Vector = (function () {
         return Math.sqrt(this.i * this.i + this.j * this.j);
     };
     Vector.prototype.angle = function () {
-        return Math.atan(this.j / this.i);
+        var atan = Math.atan(this.j / this.i);
+        if (this.i < 0)
+            atan += Math.PI;
+        return atan;
     };
     Vector.prototype.setAmount = function (newAmount) {
         var ratio = newAmount / this.amount();
@@ -238,14 +241,18 @@ var Vector = (function () {
         return this;
     };
     Vector.prototype.setAngle = function (angle) {
+        angle = angle % (2 * Math.PI);
         var oldAmount = this.amount();
         this.i = 1;
-        this.j = Math.tan(angle);
+        if ((angle > Math.PI / 2 && angle < 3 * Math.PI / 2) || angle < -Math.PI / 2)
+            this.i = -1;
+        this.j = this.i * Math.tan(angle);
         this.setAmount(oldAmount);
         return this;
     };
     Vector.prototype.rotateRight = function (angle) {
-        this.setAngle(this.angle() + angle * Math.PI / 180);
+        var oldAngle = this.angle();
+        this.setAngle(oldAngle + angle * Math.PI / 180);
         return this;
     };
     Vector.prototype.rotateLeft = function (angle) {
