@@ -6,7 +6,9 @@ var Config = (function () {
         this.playerMass = playerMass;
         this.energyLossConstant = 0.005;
         this.springConstant = 25;
-        this.springBaseLength = 100;
+        this.springBaseLength = 80;
+        this.springDistanceFromPlayer = 70;
+        this.springMaximumEnergy = 1800;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -30,9 +32,8 @@ var Level = (function () {
         this.collisionListeners = [];
         this.finished = false;
         var config = levelConfig[levelNumber];
-        var playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
-        this.player = new Player(playerStartingPosition);
-        this.spring = new Spring(playerStartingPosition, config.springOrientation);
+        this.player = new Player(new Point(config.playerStartX, config.playerStartY));
+        this.spring = new Spring(this.player, config.springOrientation);
         for (var _i = 0, _a = config.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
@@ -155,24 +156,25 @@ var Point = (function () {
     return Point;
 }());
 var Spring = (function () {
-    function Spring(positionToReference, orientation) {
+    function Spring(player, orientation) {
+        this.player = player;
         this.orientation = orientation;
         this.energy = 0;
         this.config = Config.getInstance();
         if (orientation === SpringOrientation.LEFT) {
-            this.position = new Point(positionToReference.x - 50, positionToReference.y);
+            this.position = new Point(player.position.x - this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(1, 0);
         }
         else if (orientation === SpringOrientation.RIGHT) {
-            this.position = new Point(positionToReference.x + 50, positionToReference.y);
+            this.position = new Point(player.position.x + this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(-1, 0);
         }
         else if (orientation === SpringOrientation.ABOVE) {
-            this.position = new Point(positionToReference.x, positionToReference.y - 50);
+            this.position = new Point(player.position.x, player.position.y - this.config.springDistanceFromPlayer);
             this.orientationVector = new Vector(0, 1);
         }
         else {
-            this.position = new Point(positionToReference.x, positionToReference.y + 50);
+            this.position = new Point(player.position.x, player.position.y + this.config.springDistanceFromPlayer);
             this.orientationVector = new Vector(0, -1);
         }
     }
@@ -195,8 +197,8 @@ var Spring = (function () {
     Spring.prototype.handleKeyEvents = function () {
         if (keyIsDown(38)) {
             this.energy += 70;
-            if (this.energy > 2000)
-                this.energy = 2000;
+            if (this.energy > this.config.springMaximumEnergy)
+                this.energy = this.config.springMaximumEnergy;
         }
         if (keyIsDown(40)) {
             this.energy -= 70;

@@ -2,7 +2,9 @@ class Config {
     public energyLossConstant: number = 0.005;
 
     public springConstant: number = 25;
-    public springBaseLength: number = 100;
+    public springBaseLength: number = 80;
+    public springDistanceFromPlayer: number = 70;
+    public springMaximumEnergy: number = 1800;
 
     constructor(public frictionFactor:number=2, public playerMass:number=10) {}
 

@@ -10,9 +10,8 @@ class Level implements IListenable{
         private levelNumber: number
     ) {
         let config = levelConfig[levelNumber];
-        let playerStartingPosition = new Point(config.playerStartX, config.playerStartY);
-        this.player = new Player(playerStartingPosition);
-        this.spring = new Spring(playerStartingPosition, config.springOrientation);
+        this.player = new Player(new Point(config.playerStartX, config.playerStartY));
+        this.spring = new Spring(this.player, config.springOrientation);
         for(let obstacle of config.obstacles) {
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
         }

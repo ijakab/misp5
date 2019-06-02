@@ -4,18 +4,18 @@ class Spring implements IListenable {
     private position: Point;
     private config: Config = Config.getInstance();
 
-    constructor(positionToReference: Point, private orientation: SpringOrientation) {
+    constructor(private player: Player, private orientation: SpringOrientation) {
         if(orientation === SpringOrientation.LEFT) {
-            this.position = new Point(positionToReference.x - 50, positionToReference.y);
+            this.position = new Point(player.position.x - this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(1, 0)
         } else if (orientation === SpringOrientation.RIGHT) {
-            this.position = new Point(positionToReference.x + 50, positionToReference.y);
+            this.position = new Point(player.position.x + this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(-1, 0)
         } else if (orientation === SpringOrientation.ABOVE) {
-            this.position = new Point(positionToReference.x, positionToReference.y-50);
+            this.position = new Point(player.position.x, player.position.y-this.config.springDistanceFromPlayer);
             this.orientationVector = new Vector(0, 1);
         } else {
-            this.position = new Point(positionToReference.x, positionToReference.y+50);
+            this.position = new Point(player.position.x, player.position.y+this.config.springDistanceFromPlayer);
             this.orientationVector = new Vector(0, -1);
         }
     }
@@ -43,7 +43,7 @@ class Spring implements IListenable {
     private handleKeyEvents(): Spring {
         if(keyIsDown(38)) { //up arrow
             this.energy += 70;
-            if(this.energy > 2000) this.energy = 2000;
+            if(this.energy > this.config.springMaximumEnergy) this.energy = this.config.springMaximumEnergy;
         }
         if(keyIsDown(40)) { //down arrow
             this.energy -= 70;
