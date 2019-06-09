@@ -44,7 +44,11 @@ var Level = (function () {
     Level.prototype.animate = function () {
         for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
             var obstacle = _a[_i];
+            strokeWeight(6);
+            stroke(2);
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
+            stroke(0);
+            strokeWeight(3);
         }
         this.drawFinish()
             .handleCollisions()
@@ -56,17 +60,18 @@ var Level = (function () {
             this.player.animate();
     };
     Level.prototype.handleCollisions = function () {
-        var collision = Math.random() < 0.5;
-        if (collision) {
-            for (var _i = 0, _a = this.collisionListeners; _i < _a.length; _i++) {
-                var collidable = _a[_i];
-                collidable.onCollide();
+        for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
+            var obstacle = _a[_i];
+            if (obstacle.checkCollision(this.player)) {
+                break;
             }
         }
         return this;
     };
     Level.prototype.drawFinish = function () {
+        fill(70);
         circle(this.finishPosition.x, this.finishPosition.y, 50);
+        fill(255);
         return this;
     };
     Level.prototype.checkFinish = function () {
@@ -82,6 +87,53 @@ var Obstacle = (function () {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
     }
+    Obstacle.prototype.checkCollision = function (player) {
+        var vectorAB = createVector(this.endPoint.x - this.startPoint.x, this.endPoint.y - this.startPoint.y);
+        var vectorAR = createVector(player.position.x - this.startPoint.x, player.position.y - this.startPoint.y);
+        var vectorBR = createVector(player.position.x - this.endPoint.x, player.position.y - this.endPoint.y);
+        var distance = -1, collision = -1;
+        var vectorProjection = vectorAB.copy().mult(vectorAR.dot(vectorAB) / vectorAB.magSq());
+        if (vectorProjection.magSq() <= vectorAB.magSq() && vectorProjection.angleBetween(vectorAB) == 0) {
+            collision = 0;
+            distance = createVector(vectorProjection.x - vectorAR.x, vectorProjection.y - vectorAR.y).mag();
+        }
+        else {
+            collision = 1;
+            distance = vectorAB.magSq() > vectorProjection.magSq() ?
+                vectorAR.mag() : vectorBR.mag();
+        }
+        if (distance != -1 && distance <= (collision == 0 ? player.radius / 2 + player.radius / 15 : player.radius / 2)) {
+            switch (collision) {
+                case 1:
+                    Obstacle.handleEdgeCollision(vectorAB.magSq() < vectorProjection.magSq() ? this.endPoint : this.startPoint, player);
+                    break;
+                case 0:
+                    var vectorNormal = createVector(vectorProjection.x - vectorAR.x, vectorProjection.y - vectorAR.y).normalize();
+                    Obstacle.handleLineCollision(player, vectorNormal, vectorAB);
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    };
+    Obstacle.handleEdgeCollision = function (collPosition, player) {
+        var Vrx = (player.position.x - collPosition.x) / (player.radius / 2);
+        var Vry = (player.position.y - collPosition.y) / (player.radius / 2);
+        var vector = player.velocity;
+        vector.i = Vrx;
+        vector.j = Vry;
+        player.setVelocity(vector);
+        console.log("edge collision");
+    };
+    Obstacle.handleLineCollision = function (player, vectorNormal, vectorAB) {
+        var vectorReflection = (createVector(player.velocity.i, player.velocity.j)).sub(vectorNormal.mult(2 * createVector(player.velocity.i, player.velocity.j).dot(vectorNormal)));
+        if (vectorReflection.angleBetween(vectorAB)) {
+            player.velocity.i = vectorReflection.x;
+            player.velocity.j = vectorReflection.y;
+        }
+    };
     return Obstacle;
 }());
 var Player = (function () {
@@ -90,6 +142,7 @@ var Player = (function () {
         this.energy = 0;
         this.velocity = new Vector(0, 0);
         this.config = Config.getInstance();
+        this.radius = 50;
     }
     Player.prototype.displayStats = function () {
         text("Ek: " + this.energy.toFixed(2), 20, 20);
@@ -97,7 +150,7 @@ var Player = (function () {
         return this;
     };
     Player.prototype.animate = function () {
-        ellipse(this.position.x, this.position.y, 50, 50);
+        ellipse(this.position.x, this.position.y, this.radius, this.radius);
         if (this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();
         }
@@ -283,46 +336,381 @@ var Vector = (function () {
 }());
 var levelConfig = [
     {
-        playerStartX: 150,
-        playerStartY: 150,
+        playerStartX: 400,
+        playerStartY: 400,
         obstacles: [
             {
-                x1: 100,
-                x2: 200,
+                x1: 20,
+                x2: 480,
+                y1: 20,
+                y2: 20
+            },
+            {
+                x1: 20,
+                x2: 20,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 20,
+                x2: 480,
+                y1: 480,
+                y2: 480
+            },
+            {
+                x1: 480,
+                x2: 480,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 160,
+                x2: 160,
+                y1: 40,
+                y2: 200
+            },
+            {
+                x1: 160,
+                x2: 180,
+                y1: 40,
+                y2: 40
+            },
+            {
+                x1: 180,
+                x2: 180,
+                y1: 40,
+                y2: 200
+            },
+            {
+                x1: 160,
+                x2: 180,
                 y1: 200,
                 y2: 200
+            },
+            {
+                x1: 70,
+                x2: 70,
+                y1: 330,
+                y2: 350
+            },
+            {
+                x1: 70,
+                x2: 270,
+                y1: 330,
+                y2: 330
+            },
+            {
+                x1: 270,
+                x2: 270,
+                y1: 330,
+                y2: 350
+            },
+            {
+                x1: 70,
+                x2: 270,
+                y1: 350,
+                y2: 350
             }
         ],
-        finishX: 400,
-        finishY: 400,
-        springOrientation: SpringOrientation.LEFT
+        finishX: 70,
+        finishY: 70,
+        springOrientation: SpringOrientation.BELOW
     },
     {
-        playerStartX: 300,
-        playerStartY: 50,
+        playerStartX: 400,
+        playerStartY: 95,
         obstacles: [
             {
-                x1: 100,
-                x2: 200,
+                x1: 20,
+                x2: 480,
+                y1: 20,
+                y2: 20
+            },
+            {
+                x1: 20,
+                x2: 20,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 20,
+                x2: 480,
+                y1: 480,
+                y2: 480
+            },
+            {
+                x1: 480,
+                x2: 480,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 160,
+                x2: 160,
+                y1: 40,
+                y2: 200
+            },
+            {
+                x1: 160,
+                x2: 180,
+                y1: 40,
+                y2: 40
+            },
+            {
+                x1: 180,
+                x2: 180,
+                y1: 40,
+                y2: 200
+            },
+            {
+                x1: 160,
+                x2: 180,
                 y1: 200,
                 y2: 200
+            },
+            {
+                x1: 70,
+                x2: 70,
+                y1: 330,
+                y2: 350
+            },
+            {
+                x1: 70,
+                x2: 270,
+                y1: 330,
+                y2: 330
+            },
+            {
+                x1: 270,
+                x2: 270,
+                y1: 330,
+                y2: 350
+            },
+            {
+                x1: 70,
+                x2: 270,
+                y1: 350,
+                y2: 350
+            },
+            {
+                x1: 390,
+                x2: 390,
+                y1: 320,
+                y2: 480
+            },
+            {
+                x1: 390,
+                x2: 410,
+                y1: 320,
+                y2: 320
+            },
+            {
+                x1: 410,
+                x2: 410,
+                y1: 320,
+                y2: 480
+            },
+            {
+                x1: 120,
+                x2: 120,
+                y1: 200,
+                y2: 220
+            },
+            {
+                x1: 120,
+                x2: 240,
+                y1: 200,
+                y2: 200
+            },
+            {
+                x1: 240,
+                x2: 240,
+                y1: 200,
+                y2: 220
+            },
+            {
+                x1: 120,
+                x2: 240,
+                y1: 220,
+                y2: 220
+            },
+        ],
+        finishX: 120,
+        finishY: 160,
+        springOrientation: SpringOrientation.ABOVE
+    },
+    {
+        playerStartX: 400,
+        playerStartY: 95,
+        obstacles: [
+            {
+                x1: 20,
+                x2: 480,
+                y1: 20,
+                y2: 20
+            },
+            {
+                x1: 20,
+                x2: 20,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 20,
+                x2: 480,
+                y1: 480,
+                y2: 480
+            },
+            {
+                x1: 480,
+                x2: 480,
+                y1: 20,
+                y2: 480
+            },
+            {
+                x1: 60,
+                x2: 60,
+                y1: 50,
+                y2: 70
+            },
+            {
+                x1: 60,
+                x2: 260,
+                y1: 50,
+                y2: 50
+            },
+            {
+                x1: 260,
+                x2: 260,
+                y1: 50,
+                y2: 70
+            },
+            {
+                x1: 60,
+                x2: 260,
+                y1: 70,
+                y2: 70
+            },
+            {
+                x1: 60,
+                x2: 60,
+                y1: 70,
+                y2: 130
+            },
+            {
+                x1: 80,
+                x2: 80,
+                y1: 70,
+                y2: 130
+            },
+            {
+                x1: 60,
+                x2: 80,
+                y1: 130,
+                y2: 130
+            },
+            {
+                x1: 190,
+                x2: 190,
+                y1: 200,
+                y2: 300
+            },
+            {
+                x1: 210,
+                x2: 210,
+                y1: 200,
+                y2: 300
+            },
+            {
+                x1: 190,
+                x2: 210,
+                y1: 200,
+                y2: 200
+            },
+            {
+                x1: 190,
+                x2: 210,
+                y1: 300,
+                y2: 300
+            },
+            {
+                x1: 280,
+                x2: 280,
+                y1: 250,
+                y2: 270
+            },
+            {
+                x1: 280,
+                x2: 480,
+                y1: 250,
+                y2: 250
+            },
+            {
+                x1: 280,
+                x2: 480,
+                y1: 270,
+                y2: 270
+            },
+            {
+                x1: 280,
+                x2: 280,
+                y1: 270,
+                y2: 380
+            },
+            {
+                x1: 300,
+                x2: 300,
+                y1: 270,
+                y2: 380
+            },
+            {
+                x1: 280,
+                x2: 300,
+                y1: 380,
+                y2: 380
+            },
+            {
+                x1: 50,
+                x2: 50,
+                y1: 300,
+                y2: 390
+            },
+            {
+                x1: 90,
+                x2: 90,
+                y1: 300,
+                y2: 390
+            },
+            {
+                x1: 50,
+                x2: 90,
+                y1: 300,
+                y2: 300
+            },
+            {
+                x1: 50,
+                x2: 90,
+                y1: 390,
+                y2: 390
             }
         ],
-        finishX: 200,
-        finishY: 200,
-        springOrientation: SpringOrientation.RIGHT
+        finishX: 360,
+        finishY: 320,
+        springOrientation: SpringOrientation.ABOVE
     }
 ];
 var levelNumber = localStorage.getItem('currentLevel') || 0;
 var level = new Level(Number(levelNumber));
+var bg;
 function setup() {
     createCanvas(500, 500);
     strokeWeight(2);
     stroke(51);
     textSize(20);
+    bg = loadImage('assets/background.jpg');
 }
 function draw() {
-    background(225, 255, 100);
+    background(bg);
     level.animate();
 }
 //# sourceMappingURL=build.js.map

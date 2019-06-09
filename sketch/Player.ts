@@ -2,6 +2,7 @@
     public energy:number = 0;
     public velocity: Vector = new Vector(0, 0);
     private config: Config = Config.getInstance();
+    public radius: number = 50;
 
     constructor(public position: Point) {
     }
@@ -13,7 +14,7 @@
     }
 
     public animate(): void {
-        ellipse(this.position.x, this.position.y, 50, 50);
+        ellipse(this.position.x, this.position.y, this.radius, this.radius);
         if(this.energy > 0) {
             this.subtractEnergy().setVelocityFromEnergy().move();
         }

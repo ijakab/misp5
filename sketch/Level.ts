@@ -1,4 +1,4 @@
-class Level implements IListenable{
+class Level implements IListenable {
     private player: Player;
     private spring: Spring;
     private obstacles: Array<Obstacle> = [];
@@ -12,7 +12,7 @@ class Level implements IListenable{
         let config = levelConfig[levelNumber];
         this.player = new Player(new Point(config.playerStartX, config.playerStartY));
         this.spring = new Spring(this.player, config.springOrientation);
-        for(let obstacle of config.obstacles) {
+        for (let obstacle of config.obstacles) {
             this.obstacles.push(new Obstacle(new Point(obstacle.x1, obstacle.y1), new Point(obstacle.x2, obstacle.y2)));
         }
         this.finishPosition = new Point(config.finishX, config.finishY);
@@ -21,8 +21,12 @@ class Level implements IListenable{
     }
 
     public animate(): void {
-        for(let obstacle of this.obstacles) {
+        for (let obstacle of this.obstacles) {
+            strokeWeight(6);
+            stroke(2);
             line(obstacle.startPoint.x, obstacle.startPoint.y, obstacle.endPoint.x, obstacle.endPoint.y);
+            stroke(0);
+            strokeWeight(3);
         }
         this.drawFinish()
             .handleCollisions()
@@ -30,26 +34,28 @@ class Level implements IListenable{
         this.player.displayStats();
         this.spring.displayStats();
         this.spring.animate();
-        if(!this.finished) this.player.animate();
+        if (!this.finished) this.player.animate();
     }
 
     private handleCollisions(): Level {
-        let collision = Math.random() < 0.5;
-        if(collision) {
-            for(let collidable of this.collisionListeners) {
-                collidable.onCollide();
+        for (let obstacle of this.obstacles) {
+            if(obstacle.checkCollision(this.player)) {
+                // this.player.energy = 0;
+                break;
             }
         }
         return this;
     }
 
     private drawFinish(): Level {
+        fill(70);
         circle(this.finishPosition.x, this.finishPosition.y, 50);
+        fill(255);
         return this;
     }
 
     private checkFinish(): Level {
-        if(this.player.position.isInRadius(this.finishPosition, 25)) {
+        if (this.player.position.isInRadius(this.finishPosition, 25)) {
             this.finished = true;
         }
         return this;
