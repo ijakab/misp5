@@ -240,6 +240,8 @@ var Spring = (function () {
         return this;
     };
     Spring.prototype.animate = function () {
+        if (this.fired)
+            return;
         this.handleKeyEvents().handleContraction().drawSpring();
     };
     Spring.prototype.handleContraction = function () {
@@ -248,6 +250,8 @@ var Spring = (function () {
         return this;
     };
     Spring.prototype.drawSpring = function () {
+        if (this.fired)
+            return this;
         var endPoint = new Point(this.position.x + this.orientationVector.i, this.position.y + this.orientationVector.j);
         line(this.position.x, this.position.y, endPoint.x, endPoint.y);
         if (!this.fired)

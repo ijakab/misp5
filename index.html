@@ -29,6 +29,7 @@
             <div id="levelControl">
                 <button id="prevLvl"><<</button>
                 <button id="nextLvl">>></button>
+                <button id="reset">Reset</button>
             </div>
         </div>
 
@@ -57,6 +58,9 @@
         document.getElementById('nextLvl').addEventListener('click', function () {
             let newLevel = currentLevel === levelConfig.length-1 ? 0 : currentLevel+1
             localStorage.setItem('currentLevel', newLevel)
+            window.location.reload()
+        })
+        document.getElementById('reset').addEventListener('click', function () {
             window.location.reload()
         })
     </script>

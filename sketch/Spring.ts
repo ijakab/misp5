@@ -27,6 +27,7 @@ class Spring implements IListenable {
     }
 
     public animate(): void {
+        if(this.fired) return;
         this.handleKeyEvents().handleContraction().drawSpring();
     }
 
@@ -37,6 +38,7 @@ class Spring implements IListenable {
     }
 
     private drawSpring(): Spring {
+        if(this.fired) return this;
         let endPoint = new Point(this.position.x+this.orientationVector.i, this.position.y+this.orientationVector.j);
         line(this.position.x, this.position.y, endPoint.x, endPoint.y);
         if(!this.fired) this.player.setPosition(endPoint);
