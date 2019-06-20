@@ -5,11 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/build.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/build.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Level.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Level.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Obstacle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Obstacle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/Player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Player.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch/levelConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/levelConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sketch/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/Config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sketch/sketch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sketch/sketch.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,68 +20,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sketch/levelConfig.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="371" column="23" lean-forward="true" selection-start-line="371" selection-start-column="23" selection-end-line="371" selection-end-column="23" />
+            <state relative-caret-position="409">
+              <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#129#1656#0" />
-                <element signature="e#143#254#0" />
-                <element signature="e#268#379#0" />
-                <element signature="e#393#506#0" />
-                <element signature="e#520#633#0" />
-                <element signature="e#647#760#0" />
-                <element signature="e#774#886#0" />
-                <element signature="e#900#1013#0" />
-                <element signature="e#1027#1141#0" />
-                <element signature="e#1155#1267#0" />
-                <element signature="e#1281#1394#0" />
-                <element signature="e#1408#1522#0" />
-                <element signature="e#1536#1649#0" />
-                <element signature="e#1837#3364#0" />
-                <element signature="e#1851#1962#0" />
-                <element signature="e#1976#2087#0" />
-                <element signature="e#2101#2214#0" />
-                <element signature="e#2228#2341#0" />
-                <element signature="e#2355#2468#0" />
-                <element signature="e#2482#2594#0" />
-                <element signature="e#2608#2721#0" />
-                <element signature="e#2735#2849#0" />
-                <element signature="e#2863#2975#0" />
-                <element signature="e#2989#3102#0" />
-                <element signature="e#3116#3230#0" />
-                <element signature="e#3244#3357#0" />
-                <element signature="e#3414#3527#0" />
-                <element signature="e#3541#3653#0" />
-                <element signature="e#3667#3780#0" />
-                <element signature="e#3798#3910#0" />
-                <element signature="e#3924#4037#0" />
-                <element signature="e#4051#4165#0" />
-                <element signature="e#4179#4292#0" />
-                <element signature="e#4527#4638#0" />
-                <element signature="e#4652#4763#0" />
-                <element signature="e#4777#4890#0" />
-                <element signature="e#4904#5017#0" />
-                <element signature="e#5055#5168#0" />
-                <element signature="e#5182#5294#0" />
-                <element signature="e#5308#5421#0" />
-                <element signature="e#5435#5549#0" />
-                <element signature="e#5590#5707#0" />
-                <element signature="e#5850#5969#0" />
-                <element signature="e#5983#6098#0" />
-                <element signature="e#5999#6117#0" />
-                <element signature="e#6131#6249#0" />
-                <element signature="e#6263#6379#0" />
-                <element signature="e#6386#6502#0" />
-                <element signature="e#6519#6636#0" />
-                <element signature="e#6650#6765#0" />
-                <element signature="e#6908#7026#0" />
-                <element signature="e#7042#7160#0" />
-                <element signature="e#7174#7292#0" />
-                <element signature="e#7306#7422#0" />
+                <element signature="n#!!block;n#checkFinish#0;n#Level#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sketch/sketch.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -110,19 +71,19 @@
         <option value="$PROJECT_DIR$/sketch/IListenable.ts" />
         <option value="$PROJECT_DIR$/sketch/Point.js" />
         <option value="$PROJECT_DIR$/sketch/Point.ts" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/sketch/Orientations.ts" />
         <option value="$PROJECT_DIR$/sketch/SpringOrientation.ts" />
         <option value="$PROJECT_DIR$/sketch/Vector.ts" />
-        <option value="$PROJECT_DIR$/sketch/Config.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/sketch/IColladible.ts" />
         <option value="$PROJECT_DIR$/sketch/Player.ts" />
         <option value="$PROJECT_DIR$/sketch/Obstacle.ts" />
-        <option value="$PROJECT_DIR$/sketch/Spring.ts" />
         <option value="$PROJECT_DIR$/sketch/Level.ts" />
-        <option value="$PROJECT_DIR$/sketch/sketch.ts" />
         <option value="$PROJECT_DIR$/sketch/levelConfig.ts" />
+        <option value="$PROJECT_DIR$/sketch/Spring.ts" />
+        <option value="$PROJECT_DIR$/sketch/Config.ts" />
+        <option value="$PROJECT_DIR$/sketch/sketch.ts" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -132,10 +93,9 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -151,12 +111,12 @@
         <subPane>
           <expand>
             <path>
-              <item name="misp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="misp5" type="462c0819:PsiDirectoryNode" />
+              <item name="mis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="misp5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="misp5" type="462c0819:PsiDirectoryNode" />
+              <item name="mis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis" type="462c0819:PsiDirectoryNode" />
               <item name="sketch" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -238,10 +198,10 @@
     <option name="totallyTimeSpent" value="32813000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.49865592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16600476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -256,7 +216,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32876712" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32876712" />
       <window_info anchor="bottom" id="GraphQL" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.34135976" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3410959" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -291,7 +251,8 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="player following spring before firing" />
     <MESSAGE value="firing the spring" />
-    <option name="LAST_COMMIT_MESSAGE" value="firing the spring" />
+    <MESSAGE value="final touches" />
+    <option name="LAST_COMMIT_MESSAGE" value="final touches" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sketch/morph.ts" />
@@ -328,13 +289,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sketch/Point.js" />
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sketch/SpringOrientation.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -346,20 +300,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sketch/Config.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -419,30 +359,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="512" column="4" selection-start-line="512" selection-start-column="4" selection-end-line="512" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sketch/sketch.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!block;n#checkFinish#0;n#Level#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sketch/Spring.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="34" lean-forward="true" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -514,6 +430,51 @@
             <element signature="e#7174#7292#0" />
             <element signature="e#7306#7422#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/Spring.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/Config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/sketch.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sketch/Level.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!block;n#checkFinish#0;n#Level#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
         </state>
       </provider>
     </entry>

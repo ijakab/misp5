@@ -24,8 +24,16 @@
             <div id="options">
                 <p>Masa :<input id="massInput" type="range" min="5" max="100" /></p>
                 <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200" /></p>
+                <p><select id="fastFriction">
+                    <option>Izaberi podlogu</option>
+                    <option value="0.1">Led</option>
+                    <option value="0.35">Trava</option>
+                    <option value="0.65">Bakar</option>
+                    <option value="0.95">Guma</option>
+                </select></p>
                 <p><button id="configSubmit" type="submit">Potvrdi</button></p>
             </div>
+            <br>
             <div id="levelControl">
                 <button id="prevLvl"><<</button>
                 <button id="nextLvl">>></button>
@@ -48,6 +56,14 @@
             localStorage.setItem('frictionFactor', friction)
             localStorage.setItem('playerMass', mass)
             window.location.reload()
+        })
+
+        var fastFriction = document.getElementById('fastFriction')
+        fastFriction.addEventListener('change', function () {
+            if(fastFriction.selectedIndex !== 0) {
+                var selected = fastFriction.options[fastFriction.selectedIndex]
+                document.getElementById('frictionInput').value = 200 * Number(selected.value)
+            }
         })
 
         document.getElementById('prevLvl').addEventListener('click', function () {

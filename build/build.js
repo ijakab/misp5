@@ -9,6 +9,7 @@ var Config = (function () {
         this.springBaseLength = 100;
         this.springDistanceFromPlayer = 70;
         this.springMaximumEnergy = 1800;
+        this.maximumFrictionFactor = 200;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -706,15 +707,53 @@ var levelConfig = [
 var levelNumber = localStorage.getItem('currentLevel') || 0;
 var level = new Level(Number(levelNumber));
 var bg;
+var config = Config.getInstance();
 function setup() {
     createCanvas(500, 500);
     strokeWeight(2);
     stroke(51);
     textSize(20);
+    setBackground([
+        {
+            to: 0.3,
+            imagePath: 'assets/background.jpg',
+            debug: 'leg'
+        },
+        {
+            from: 0.3,
+            to: 0.6,
+            imagePath: 'assets/background.jpg',
+            debug: 'trava'
+        },
+        {
+            from: 0.6,
+            to: 0.9,
+            imagePath: 'assets/background.jpg',
+            debug: 'bakar'
+        },
+        {
+            from: 0.9,
+            imagePath: 'assets/background.jpg',
+            debug: 'guma'
+        }
+    ]);
     bg = loadImage('assets/background.jpg');
 }
 function draw() {
     background(bg);
     level.animate();
+}
+function setBackground(backgroundOptions) {
+    for (var _i = 0, backgroundOptions_1 = backgroundOptions; _i < backgroundOptions_1.length; _i++) {
+        var backgroundOption = backgroundOptions_1[_i];
+        if (!backgroundOption.from)
+            backgroundOption.from = 0;
+        if (!backgroundOption.to)
+            backgroundOption.to = 1;
+        if (config.frictionFactor > config.maximumFrictionFactor * backgroundOption.from && config.frictionFactor <= config.maximumFrictionFactor * backgroundOption.to) {
+            console.log('bg je ', backgroundOption.debug);
+            bg = loadImage(backgroundOption.imagePath);
+        }
+    }
 }
 //# sourceMappingURL=build.js.map

@@ -5,6 +5,7 @@ class Config {
     public springBaseLength: number = 100;
     public springDistanceFromPlayer: number = 70;
     public springMaximumEnergy: number = 1800;
+    public maximumFrictionFactor: number = 200;
 
     constructor(public frictionFactor:number=2, public playerMass:number=10) {}
 
