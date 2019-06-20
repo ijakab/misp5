@@ -724,28 +724,27 @@ function setup() {
     setBackground([
         {
             to: 0.3,
-            imagePath: 'assets/background.jpg',
+            imagePath: 'assets/ice.jpg',
             debug: 'leg'
         },
         {
             from: 0.3,
             to: 0.6,
-            imagePath: 'assets/background.jpg',
+            imagePath: 'assets/grass.jpg',
             debug: 'trava'
         },
         {
             from: 0.6,
             to: 0.9,
-            imagePath: 'assets/background.jpg',
+            imagePath: 'assets/copper.jpg',
             debug: 'bakar'
         },
         {
             from: 0.9,
-            imagePath: 'assets/background.jpg',
+            imagePath: 'assets/rubber.jpg',
             debug: 'guma'
         }
     ]);
-    bg = loadImage('assets/background.jpg');
 }
 function draw() {
     background(bg);
