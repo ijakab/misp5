@@ -24,6 +24,10 @@
             <div id="options">
                 <p>Masa :<input id="massInput" type="range" min="5" max="100" /></p>
                 <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200" /></p>
+                <p>
+                    <label for="chooseEnergy">Unesi potencijalnu energiju opruge: </label>
+                    <input type="number" min="0" max="1800" value="0" id="chooseEnergy">
+                </p>
                 <p><select id="fastFriction">
                     <option>Izaberi podlogu</option>
                     <option value="0.1">Led</option>
@@ -45,14 +49,18 @@
     <script>
         let mass = Number(localStorage.getItem('playerMass')) || 2
         let friction = Number(localStorage.getItem('frictionFactor')) || 10
+        var initialPotentialEnergy = Number(localStorage.getItem('initialPotentialEnergy')) || 0
         document.getElementById('massInput').value = mass
         document.getElementById('frictionInput').value = friction
+        document.getElementById('chooseEnergy').value = initialPotentialEnergy
         let currentLevel = Number(localStorage.getItem('currentLevel') || 0)
 
         document.getElementById('configSubmit').addEventListener('click', function (e) {
             e.preventDefault()
             var mass = document.getElementById('massInput').value
             var friction = document.getElementById('frictionInput').value
+            var initialPotentialEnergy = document.getElementById('chooseEnergy').value
+            localStorage.setItem('initialPotentialEnergy', initialPotentialEnergy)
             localStorage.setItem('frictionFactor', friction)
             localStorage.setItem('playerMass', mass)
             window.location.reload()

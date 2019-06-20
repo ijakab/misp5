@@ -6,6 +6,7 @@ class Spring implements IListenable {
     private fired:boolean = false;
 
     constructor(private player: Player, private orientation: SpringOrientation) {
+        this.energy = this.config.initialPotentialEnergy;
         if(orientation === SpringOrientation.LEFT) {
             this.position = new Point(player.position.x - this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(1, 0)

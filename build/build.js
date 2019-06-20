@@ -10,6 +10,7 @@ var Config = (function () {
         this.springDistanceFromPlayer = 70;
         this.springMaximumEnergy = 1800;
         this.maximumFrictionFactor = 200;
+        this.initialPotentialEnergy = 0;
     }
     Config.getInstance = function () {
         if (this.instance)
@@ -23,6 +24,12 @@ var Config = (function () {
     Config.prototype.loadConfig = function () {
         this.frictionFactor = Number(localStorage.getItem('frictionFactor')) || 2;
         this.playerMass = Number(localStorage.getItem('playerMass')) || 10;
+        var chosenEnergy = Number(localStorage.getItem('initialPotentialEnergy')) || 0;
+        if (chosenEnergy < 0)
+            chosenEnergy = 0;
+        if (chosenEnergy > this.springMaximumEnergy)
+            chosenEnergy = this.springMaximumEnergy;
+        this.initialPotentialEnergy = chosenEnergy;
     };
     return Config;
 }());
@@ -219,6 +226,7 @@ var Spring = (function () {
         this.energy = 0;
         this.config = Config.getInstance();
         this.fired = false;
+        this.energy = this.config.initialPotentialEnergy;
         if (orientation === SpringOrientation.LEFT) {
             this.position = new Point(player.position.x - this.config.springDistanceFromPlayer, player.position.y);
             this.orientationVector = new Vector(1, 0);
