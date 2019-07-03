@@ -1,92 +1,103 @@
 <html>
-    <head>
-<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>  -->
-        <script src="p5.min.js"></script>
-        <script src="build/build.js"></script>
+<head>
+    <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>  -->
+    <script src="p5.min.js"></script>
+    <script src="build/build.js"></script>
 
-        <link rel="shortcut icon" href="https://p5js.org/assets/img/favicon.ico">
-            <link rel="icon" href="https://p5js.org/assets/img/favicon.ico">
+    <link rel="shortcut icon" href="https://p5js.org/assets/img/favicon.ico">
+    <link rel="icon" href="https://p5js.org/assets/img/favicon.ico">
 
-        <style>
-            * {
-                padding: 0px;
-                margin: 0px;
-            }
-            #container {
-                margin: 20px;
-            }
-        </style>
-        <script>
-        </script>
-    </head>
-    <body>
-        <div id="container">
-            <div id="options">
-                <p>Masa :<input id="massInput" type="range" min="5" max="100" /></p>
-                <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200" /></p>
-                <p>
-                    <label for="chooseEnergy">Unesi potencijalnu energiju opruge: </label>
-                    <input type="number" min="0" max="1800" value="0" id="chooseEnergy">
-                </p>
-                <p><select id="fastFriction">
-                    <option>Izaberi podlogu</option>
-                    <option value="0.1">Led</option>
-                    <option value="0.35">Trava</option>
-                    <option value="0.65">Bakar</option>
-                    <option value="0.95">Guma</option>
-                </select></p>
-                <p><button id="configSubmit" type="submit">Potvrdi</button></p>
-            </div>
-            <br>
-            <div id="levelControl">
-                <button id="prevLvl"><<</button>
-                <button id="nextLvl">>></button>
-                <button id="reset">Reset</button>
-            </div>
-        </div>
+    <style>
+        .topright {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            font-size: 18px;
+        }
 
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
 
+        #container {
+            margin: 20px;
+            position: absolute;
+            top: 8px;
+            right: 16px;
+        }
+    </style>
     <script>
-        let mass = Number(localStorage.getItem('playerMass')) || 2
-        let friction = Number(localStorage.getItem('frictionFactor')) || 10
-        var initialPotentialEnergy = Number(localStorage.getItem('initialPotentialEnergy')) || 0
-        document.getElementById('massInput').value = mass
-        document.getElementById('frictionInput').value = friction
-        document.getElementById('chooseEnergy').value = initialPotentialEnergy
-        let currentLevel = Number(localStorage.getItem('currentLevel') || 0)
-
-        document.getElementById('configSubmit').addEventListener('click', function (e) {
-            e.preventDefault()
-            var mass = document.getElementById('massInput').value
-            var friction = document.getElementById('frictionInput').value
-            var initialPotentialEnergy = document.getElementById('chooseEnergy').value
-            localStorage.setItem('initialPotentialEnergy', initialPotentialEnergy)
-            localStorage.setItem('frictionFactor', friction)
-            localStorage.setItem('playerMass', mass)
-            window.location.reload()
-        })
-
-        var fastFriction = document.getElementById('fastFriction')
-        fastFriction.addEventListener('change', function () {
-            if(fastFriction.selectedIndex !== 0) {
-                var selected = fastFriction.options[fastFriction.selectedIndex]
-                document.getElementById('frictionInput').value = 200 * Number(selected.value)
-            }
-        })
-
-        document.getElementById('prevLvl').addEventListener('click', function () {
-            let newLevel = currentLevel === 0 ? levelConfig.length-1 : currentLevel-1
-            localStorage.setItem('currentLevel', newLevel)
-            window.location.reload()
-        })
-        document.getElementById('nextLvl').addEventListener('click', function () {
-            let newLevel = currentLevel === levelConfig.length-1 ? 0 : currentLevel+1
-            localStorage.setItem('currentLevel', newLevel)
-            window.location.reload()
-        })
-        document.getElementById('reset').addEventListener('click', function () {
-            window.location.reload()
-        })
     </script>
-    </body>
+</head>
+<body>
+<div id="container">
+    <div id="options">
+        <p>Masa :<input id="massInput" type="range" min="5" max="100"/></p>
+        <p>Koeficijent trenja :<input id="frictionInput" type="range" min="5" max="200"/></p>
+        <p>
+            <label for="chooseEnergy">Unesi potencijalnu energiju opruge: </label>
+            <input type="number" min="0" max="1800" value="0" id="chooseEnergy">
+        </p>
+        <p><select id="fastFriction">
+            <option>Izaberi podlogu</option>
+            <option value="0.1">Led</option>
+            <option value="0.35">Trava</option>
+            <option value="0.65">Bakar</option>
+            <option value="0.95">Guma</option>
+        </select></p>
+        <p>
+            <button id="configSubmit" type="submit">Potvrdi</button>
+        </p>
+    </div>
+    <br>
+    <div id="levelControl">
+        <button id="prevLvl"><<</button>
+        <button id="nextLvl">>></button>
+        <button id="reset">Reset</button>
+    </div>
+</div>
+<script>
+    let mass = Number(localStorage.getItem('playerMass')) || 2
+    let friction = Number(localStorage.getItem('frictionFactor')) || 10
+    var initialPotentialEnergy = Number(localStorage.getItem('initialPotentialEnergy')) || 0
+    document.getElementById('massInput').value = mass
+    document.getElementById('frictionInput').value = friction
+    document.getElementById('chooseEnergy').value = initialPotentialEnergy
+    let currentLevel = Number(localStorage.getItem('currentLevel') || 0)
+
+    document.getElementById('configSubmit').addEventListener('click', function (e) {
+        e.preventDefault()
+        var mass = document.getElementById('massInput').value
+        var friction = document.getElementById('frictionInput').value
+        var initialPotentialEnergy = document.getElementById('chooseEnergy').value
+        localStorage.setItem('initialPotentialEnergy', initialPotentialEnergy)
+        localStorage.setItem('frictionFactor', friction)
+        localStorage.setItem('playerMass', mass)
+        window.location.reload()
+    })
+
+    var fastFriction = document.getElementById('fastFriction')
+    fastFriction.addEventListener('change', function () {
+        if (fastFriction.selectedIndex !== 0) {
+            var selected = fastFriction.options[fastFriction.selectedIndex]
+            document.getElementById('frictionInput').value = 200 * Number(selected.value)
+        }
+    })
+
+    document.getElementById('prevLvl').addEventListener('click', function () {
+        let newLevel = currentLevel === 0 ? levelConfig.length - 1 : currentLevel - 1
+        localStorage.setItem('currentLevel', newLevel)
+        window.location.reload()
+    })
+    document.getElementById('nextLvl').addEventListener('click', function () {
+        let newLevel = currentLevel === levelConfig.length - 1 ? 0 : currentLevel + 1
+        localStorage.setItem('currentLevel', newLevel)
+        window.location.reload()
+    })
+    document.getElementById('reset').addEventListener('click', function () {
+        window.location.reload()
+    })
+</script>
+</body>
 </html>

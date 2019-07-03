@@ -18,13 +18,13 @@ class Obstacle {
         );
         let distance: number = -1, collision: number = -1;
         let vectorProjection = vectorAB.copy().mult(vectorAR.dot(vectorAB) / vectorAB.magSq());
-        if(vectorProjection.magSq() <= vectorAB.magSq() && vectorProjection.angleBetween(vectorAB) == 0) {//line
+        if (vectorProjection.magSq() <= vectorAB.magSq() && vectorProjection.angleBetween(vectorAB) == 0) {//line
             collision = 0;
             distance = createVector(vectorProjection.x - vectorAR.x, vectorProjection.y - vectorAR.y).mag();
         } else {//edge collision
             collision = 1;
             distance = vectorAB.magSq() > vectorProjection.magSq() ?
-            vectorAR.mag() : vectorBR.mag();
+                vectorAR.mag() : vectorBR.mag();
         }
         if (distance != -1 && distance <= (collision == 0 ? player.radius / 2 + player.radius / 15 : player.radius / 2)) {
             switch (collision) {
@@ -54,9 +54,10 @@ class Obstacle {
         vector.j = Vry;
         player.setVelocity(vector);
         console.log("edge collision");
+        player.onCollide();
     }
 
-    private static handleLineCollision(player: Player, vectorNormal:p5.Vector, vectorAB:p5.Vector) {
+    private static handleLineCollision(player: Player, vectorNormal: p5.Vector, vectorAB: p5.Vector) {
         let vectorReflection = (
             createVector(player.velocity.i, player.velocity.j)
         ).sub(vectorNormal.mult(2 * createVector(player.velocity.i, player.velocity.j).dot(
@@ -67,6 +68,7 @@ class Obstacle {
             player.velocity.i = vectorReflection.x;
             player.velocity.j = vectorReflection.y;
         }
+        player.onCollide();
     }
 
 }
