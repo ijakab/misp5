@@ -21,7 +21,7 @@
     }
 
     onCollide(): void {
-        this.energy *= 0.85;
+        this.energy *= 1;
     }
 
     private setVelocityFromEnergy() : Player {
