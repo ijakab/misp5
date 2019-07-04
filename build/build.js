@@ -134,6 +134,7 @@ var Obstacle = (function () {
         vector.j = Vry;
         player.setVelocity(vector);
         console.log("edge collision");
+        player.onCollide();
     };
     Obstacle.handleLineCollision = function (player, vectorNormal, vectorAB) {
         var vectorReflection = (createVector(player.velocity.i, player.velocity.j)).sub(vectorNormal.mult(2 * createVector(player.velocity.i, player.velocity.j).dot(vectorNormal)));
@@ -141,6 +142,7 @@ var Obstacle = (function () {
             player.velocity.i = vectorReflection.x;
             player.velocity.j = vectorReflection.y;
         }
+        player.onCollide();
     };
     return Obstacle;
 }());
@@ -164,6 +166,10 @@ var Player = (function () {
         }
     };
     Player.prototype.onCollide = function () {
+        this.energy -= 50;
+        if (this.energy < 0)
+            this.energy = 0;
+        return this;
     };
     Player.prototype.setVelocityFromEnergy = function () {
         if (this.velocity.amount() === 0)

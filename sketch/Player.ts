@@ -20,8 +20,12 @@
         }
     }
 
-    onCollide(): void {
-        this.energy *= 1;
+    onCollide(): Player {
+        this.energy -= 50;
+        if(this.energy<0)
+            this.energy=0;
+            return this
+        
     }
 
     private setVelocityFromEnergy() : Player {
